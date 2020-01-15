@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:TipCalculator.xcodeproj">
+      location = "group:/Users/alex/Projects/TipCalculator/walkthrough.gif">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>
