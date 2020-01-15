@@ -16,7 +16,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var tipValueLabel: UILabel!
     @IBOutlet weak var totalValueLabel: UILabel!
     
-    var tipPercent = 0.1
+    let tipPercents = [
+        0.10,
+        0.15,
+        0.20
+    ]
+    
+    var selectedIndex = UserDefaults.standard.integer(forKey: "tipPercent")
     
     @IBAction func onBillAmountChanged(_ sender: Any) {
         // Hide the tip and total labels when the bill text field becomes empty
@@ -45,19 +51,31 @@ class ViewController: UIViewController {
     
     func updateTotals() {
         let bill = Double(billAmountTextField.text!) ?? 0
-            
-        let tip = bill * self.tipPercent
-            self.tipValueLabel.text = String(format: "$%.2f", tip)
-            
-            let total = bill + tip
-            self.totalValueLabel.text = String(format: "$%.2f", total)
+        
+        let tip = bill * self.tipPercents[selectedIndex]
+        self.tipValueLabel.text = String(format: "$%.2f", tip)
+        
+        let total = bill + tip
+        self.totalValueLabel.text = String(format: "$%.2f", total)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // Update the selectedIndex here when the default value changes from the settings page
+        self.selectedIndex = UserDefaults.standard.integer(forKey: "tipPercent")
+        self.tipPercentSegmentedControl.selectedSegmentIndex = self.selectedIndex
+        self.updateTotals()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
         // Autofocus the bill amount text field when the view loads
         self.billAmountTextField.becomeFirstResponder()
+        
+        // Select the user's default tip percent when the view loads
+        tipPercentSegmentedControl.selectedSegmentIndex = self.selectedIndex
         
         // Puts the tip percent segmented control directly above the keyboard
         self.startAvoidingKeyboard()
@@ -69,16 +87,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func onTipPercentChanged(_ sender: Any) {
-        switch self.tipPercentSegmentedControl.selectedSegmentIndex {
-        case 0:
-            self.tipPercent = 0.1
-        case 1:
-            self.tipPercent = 0.15
-        case 2:
-            self.tipPercent = 0.2
-        default:
-            self.tipPercent = 0.1
-        }
+        self.selectedIndex = self.tipPercentSegmentedControl.selectedSegmentIndex
         self.updateTotals()
     }
     
@@ -90,7 +99,7 @@ class ViewController: UIViewController {
                          name: UIResponder.keyboardWillChangeFrameNotification,
                          object: nil)
     }
-        
+    
     // Logic from https://stackoverflow.com/questions/45399178/extend-ios-11-safe-area-to-include-the-keyboard/46566119
     @objc
     private func onKeyboardFrameWillChangeNotificationReceived(_ notification: Notification)

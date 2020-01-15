@@ -14,6 +14,7 @@
 		FA5726B423CD3E480062F993 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5726B223CD3E480062F993 /* Main.storyboard */; };
 		FA5726B623CD3E4B0062F993 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA5726B523CD3E4B0062F993 /* Assets.xcassets */; };
 		FA5726B923CD3E4B0062F993 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA5726B723CD3E4B0062F993 /* LaunchScreen.storyboard */; };
+		FAA2FD7E23CFD4B9009CFE43 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAA2FD7D23CFD4B9009CFE43 /* SettingsViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		FA5726B823CD3E4B0062F993 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA5726BA23CD3E4B0062F993 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA9BEB2D23CEE2B7008926CE /* walkthrough.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = walkthrough.gif; path = /Users/alex/Projects/TipCalculator/walkthrough.gif; sourceTree = "<absolute>"; };
+		FAA2FD7D23CFD4B9009CFE43 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 				FA5726B523CD3E4B0062F993 /* Assets.xcassets */,
 				FA5726B723CD3E4B0062F993 /* LaunchScreen.storyboard */,
 				FA5726BA23CD3E4B0062F993 /* Info.plist */,
+				FAA2FD7D23CFD4B9009CFE43 /* SettingsViewController.swift */,
 			);
 			path = TipCalculator;
 			sourceTree = "<group>";
@@ -146,6 +149,7 @@
 			files = (
 				FA5726B123CD3E480062F993 /* ViewController.swift in Sources */,
 				FA5726AD23CD3E480062F993 /* AppDelegate.swift in Sources */,
+				FAA2FD7E23CFD4B9009CFE43 /* SettingsViewController.swift in Sources */,
 				FA5726AF23CD3E480062F993 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
