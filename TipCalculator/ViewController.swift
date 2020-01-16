@@ -25,32 +25,46 @@ class ViewController: UIViewController {
     var selectedIndex = UserDefaults.standard.integer(forKey: "tipPercent")
     
     @IBAction func onBillAmountChanged(_ sender: Any) {
-        // Hide the tip and total labels when the bill text field becomes empty
-        if (billAmountTextField.text!.isEmpty) {
-            UIView.animate(withDuration: 0.2) {
-                self.tipLabel.alpha = 0
-                self.totalLabel.alpha = 0
-                self.tipValueLabel.alpha = 0
-                self.totalValueLabel.alpha = 0
-            }
-        } else {
-            // Update tip and total values every time the bill amount changes
-            self.updateTotals()
-            
-            // If the tip and total labels are hidden, unhide them
-            if (self.tipLabel.alpha == 0) {
-                UIView.animate(withDuration: 0.2) {
-                    self.tipLabel.alpha = 1
-                    self.totalLabel.alpha = 1
-                    self.tipValueLabel.alpha = 1
-                    self.totalValueLabel.alpha = 1
-                }
-            }
+        // Automatically add a dollar sign to the textField when a number is entered
+        if (!billAmountTextField.text!.contains("$")) {
+            billAmountTextField.text = "$\(billAmountTextField.text!)"
+        }
+        
+        // If the textField is empty (contains only a dollar sign), clear the bill text field and hide the labels
+        if (billAmountTextField.text! == "$") {
+            billAmountTextField.text = ""
+            self.hideTotals()
+            return
+        }
+        
+        // Update tip and total values every time the bill amount changes
+        self.updateTotals()
+        
+        // If the tip and total labels are hidden, unhide them
+        if (self.tipLabel.alpha == 0) {
+            self.showTotals()
+        }
+    }
+    
+    func showTotals() {
+        self.setTotalsAlpha(1)
+    }
+    
+    func hideTotals() {
+        self.setTotalsAlpha(0)
+    }
+    
+    func setTotalsAlpha(_ alpha: CGFloat) {
+        UIView.animate(withDuration: 0.2) {
+            self.tipLabel.alpha = alpha
+            self.totalLabel.alpha = alpha
+            self.tipValueLabel.alpha = alpha
+            self.totalValueLabel.alpha = alpha
         }
     }
     
     func updateTotals() {
-        let bill = Double(billAmountTextField.text!) ?? 0
+        let bill = Double(billAmountTextField.text!.replacingOccurrences(of: "$", with: "")) ?? 0
         
         let tip = bill * self.tipPercents[selectedIndex]
         self.tipValueLabel.text = String(format: "$%.2f", tip)
